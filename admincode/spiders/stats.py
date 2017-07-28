@@ -36,7 +36,7 @@ class StatsSpider(scrapy.Spider):
                 item['parent_code'] = item.get_parent()
                 item['url'] = response.urljoin(href)
             yield item
-            if item['url']:
+            if 'url' in item.keys():
                 yield scrapy.Request(item['url'], callback=self.parse)
 
     def parse_2td(self, response, trs, codetype):
@@ -51,7 +51,7 @@ class StatsSpider(scrapy.Spider):
             if href:
                 item['url'] = response.urljoin(href)
             yield item
-            if item['url']:
+            if 'url' in item.keys():
                 yield scrapy.Request(item['url'], callback=self.parse)
 
     def parse_citytr(self, response, trs):
@@ -78,5 +78,5 @@ class StatsSpider(scrapy.Spider):
             if href:
                 item['url'] = response.urljoin(href)
             yield item
-            if item['url']:
+            if 'url' in item.keys():
                 yield scrapy.Request(item['url'], callback=self.parse)

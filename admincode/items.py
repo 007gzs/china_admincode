@@ -18,15 +18,15 @@ class AdmincodeItem(scrapy.Item):
     towntypecode = scrapy.Field() # 城乡分类代码为：   100 城镇   110 城区   111 主城区    112 城乡结合区   120 镇区    121 镇中心区   122 镇乡结合区   123 特殊区域   200 乡村   210 乡中心区   220 村庄
 
     def get_parent(self):
-        if codetype == 'province':
+        if self['codetype'] == 'province':
             return ('0' * 12)
-        elif codetype == 'city':
-            return code[0:2] + ('0' * 10)
-        elif codetype == 'county':
-            return code[0:4] + ('0' * 8)
-        elif codetype == 'town':
-            return code[0:6] + ('0' * 6)
-        elif codetype == 'village':
-            return code[0:9] + ('0' * 3)
+        elif self['codetype'] == 'city':
+            return self['code'][0:2] + ('0' * 10)
+        elif self['codetype'] == 'county':
+            return self['code'][0:4] + ('0' * 8)
+        elif self['codetype'] == 'town':
+            return self['code'][0:6] + ('0' * 6)
+        elif self['codetype'] == 'village':
+            return self['code'][0:9] + ('0' * 3)
         else:
             raise
